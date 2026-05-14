@@ -8,32 +8,16 @@
 <meta name="theme-color" content="#9590D0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" href="design.css">
+<script src="tailwind-config.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          primary: { DEFAULT: '#9590D0', light: '#BDB8E8', dark: '#7A75BB', xlight: '#EDE9FF' },
-          secondary: '#E2E4F4',
-        },
-        fontFamily: {
-          sans: ['Noto Sans TC', 'sans-serif'],
-          heading: ['Figtree', 'Noto Sans TC', 'sans-serif'],
-        },
-      }
-    }
-  }
-</script>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="design.js" defer></script>
 <style>
-  body { font-family: 'Noto Sans TC', sans-serif; -webkit-tap-highlight-color: transparent; }
-  .font-heading, h1, h2, h3 { font-family: 'Figtree', 'Noto Sans TC', sans-serif; }
-  .tabular { font-variant-numeric: tabular-nums; }
+  body { -webkit-tap-highlight-color: transparent; }
 
-  /* ── 卡片 ── */
-  .card { background:#fff; border-radius:16px; box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px; margin-bottom:12px; }
-  .card-title { font-family:'Figtree','Noto Sans TC',sans-serif; font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px; }
+  /* ── 卡片 margin（gupan 專屬：每張卡片下方 12px）── */
+  .card { margin-bottom: 12px; }
 
   /* ── 台類輸入格 ── */
   .tai-input {
@@ -84,14 +68,6 @@
   }
   .staff-select:focus { border-color:#9590D0; }
 
-  /* ── 按鈕 ── */
-  .btn-primary { width:100%; height:52px; background:#9590D0; color:#fff; font-size:16px; font-weight:600; border-radius:14px; border:none; cursor:pointer; transition:background .15s; font-family:'Noto Sans TC',sans-serif; }
-  .btn-primary:active { background:#7A75BB; }
-  .btn-secondary { width:100%; height:44px; background:#F1F5F9; color:#475569; font-size:14px; font-weight:500; border-radius:10px; border:none; cursor:pointer; font-family:'Noto Sans TC',sans-serif; }
-  .btn-secondary:active { background:#E2E8F0; }
-  .btn-confirm { width:100%; height:52px; background:#2563EB; color:#fff; font-size:16px; font-weight:600; border-radius:14px; border:none; cursor:pointer; font-family:'Noto Sans TC',sans-serif; }
-  .btn-confirm:active { background:#1D4ED8; }
-
   /* disabled state */
   input:disabled, select:disabled { opacity:.55; cursor:not-allowed; }
   .form-locked .tai-input,
@@ -126,29 +102,10 @@
   /* ── 鎖定確認卡片 ── */
   .confirm-info { background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:14px 16px; }
 
-  /* ── Sidebar ── */
-  .sidebar-link {
-    display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px;
-    font-size:13.5px; font-weight:500; color:#64748B; cursor:pointer;
-    transition:background .15s, color .15s; user-select:none;
-  }
-  .sidebar-link:hover { background:#F5F3FF; color:#9590D0; }
-  .sidebar-link.active { background:#EDE9FF; color:#7A75BB; font-weight:600; }
-  .sidebar-link svg { width:18px; height:18px; flex-shrink:0; }
-
-  /* ── Mobile Nav Drawer ── */
-  #nav-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:45; }
-  #nav-drawer {
-    position:fixed; top:0; left:0; bottom:0; width:240px; background:white;
-    z-index:50; transform:translateX(-100%); transition:transform .25s ease;
-    display:flex; flex-direction:column; padding:16px 12px; gap:4px;
-    box-shadow:4px 0 20px rgba(0,0,0,.15);
-  }
-  #nav-drawer.open { transform:translateX(0); }
 </style>
 </head>
 
-<body class="bg-slate-50" style="padding-top:56px;">
+<body class="bg-slate-50 text-slate-800">
 
 <!-- ════════════════ MOBILE NAV OVERLAY ════════════════ -->
 <div id="nav-overlay" onclick="closeNav()"></div>
@@ -203,15 +160,7 @@
 </div>
 
 <!-- ════════════════ DESKTOP ASIDE ════════════════ -->
-<aside class="hidden md:flex fixed left-0 top-0 h-full w-52 flex-col border-r border-slate-200 bg-white z-40 px-3 py-4 gap-1">
-  <div class="flex items-center gap-2.5 px-1 mb-4">
-    <div class="w-7 h-7 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
-      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-      </svg>
-    </div>
-    <span class="font-heading font-semibold text-slate-800 text-sm leading-tight">培養液管理系統</span>
-  </div>
+<aside class="hidden md:flex fixed left-0 top-14 bottom-0 w-52 flex-col border-r border-slate-200 bg-white z-20 overflow-y-auto px-3 py-4 gap-1">
   <div class="sidebar-link active">
     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
     今日估盤
@@ -245,51 +194,52 @@
 </aside>
 
 <!-- ════════════════ HEADER ════════════════ -->
-<header class="fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-200 flex items-center justify-between px-4 z-30 shadow-sm">
+<header id="app-header" class="fixed top-0 left-0 right-0 h-14 bg-white border-b border-slate-200 flex items-center justify-between px-4 z-30 shadow-sm">
   <div class="flex items-center gap-3">
-    <!-- Hamburger (mobile only) -->
-    <button class="md:hidden p-1.5 rounded-lg text-slate-500 hover:bg-slate-100" onclick="openNav()">
+    <button class="md:hidden w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-100 text-slate-500 transition-colors" onclick="openNav()">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
     </button>
-    <div class="flex items-center gap-2.5">
-      <div class="w-7 h-7 rounded-lg bg-primary flex items-center justify-center flex-shrink-0 md:hidden">
-        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-        </svg>
-      </div>
-      <div>
-        <div class="font-heading font-semibold text-slate-800 text-sm leading-tight">今日估盤 <span style="font-size:10px;font-weight:400;color:#94a3b8;font-family:monospace;">v2.0.0</span></div>
-        <div class="text-xs text-slate-400 tabular leading-tight" id="header-date">2026/04/30</div>
-      </div>
+    <div class="w-7 h-7 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
+      <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+      </svg>
     </div>
+    <span class="font-heading font-semibold text-slate-800 text-base">培養液管理系統</span>
   </div>
-  <div class="flex items-center gap-2">
-    <span class="autosave-dot"></span>
-    <span class="text-xs text-slate-400 tabular">自動儲存 <span id="autosave-time">14:22</span></span>
+  <div class="flex items-center gap-3">
+    <span class="text-sm text-slate-500 tabular hidden md:block" id="today-display"></span>
+    <span class="flex items-center gap-1 text-xs text-slate-400 tabular">
+      <span class="autosave-dot"></span>自動儲存 <span id="autosave-time">--:--</span>
+    </span>
+    <div class="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-xs font-bold text-primary-dark">ZY</div>
   </div>
 </header>
 
-<!-- ════════════════ STATE BANNER ════════════════ -->
-<div id="banner-b" class="banner banner-blue hidden" style="position:sticky; top:56px; z-index:20;">
-  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-  </svg>
-  等待第二人核對確認
-</div>
-<div id="banner-c" class="banner banner-green hidden" style="position:sticky; top:56px; z-index:20;">
-  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-  </svg>
-  <span>估盤已確認鎖定 — <span id="confirm-info-text">胚胎師乙 核對，14:38</span></span>
-</div>
+<div class="flex flex-col min-h-screen pt-14">
 
-<!-- ════════════════ MAIN ════════════════ -->
-<main class="flex-1 md:ml-52 px-4 md:px-6 py-5 pb-28 md:pb-8">
+  <!-- ════════════════ STATE BANNER ════════════════ -->
+  <div id="banner-b" class="banner banner-blue hidden" style="position:sticky; top:56px; z-index:20;">
+    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    </svg>
+    等待第二人核對確認
+  </div>
+  <div id="banner-c" class="banner banner-green hidden" style="position:sticky; top:56px; z-index:20;">
+    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    </svg>
+    <span>估盤已確認鎖定 — <span id="confirm-info-text">胚胎師乙 核對，14:38</span></span>
+  </div>
 
-  <!-- ── Demo 狀態切換 ── -->
-  <div class="flex gap-2 py-1 overflow-x-auto mb-3">
+  <div class="flex flex-1">
+
+  <!-- ════════════════ MAIN ════════════════ -->
+  <main class="flex-1 md:ml-52 px-4 md:px-6 py-5 pb-28 md:pb-8">
+
+  <!-- ── Demo 狀態切換（開發用，隱藏）── -->
+  <div id="dev-demo-controls" class="hidden flex gap-2 py-1 overflow-x-auto mb-3">
     <span class="text-xs text-slate-400 whitespace-nowrap self-center">預覽狀態：</span>
     <button class="demo-btn active" onclick="switchState('A')">A 輸入中</button>
     <button class="demo-btn" onclick="switchState('B')">B 等待核對</button>
@@ -474,6 +424,8 @@
   </div><!-- /page-gupan -->
 
 </main>
+  </div><!-- /flex flex-1 -->
+</div><!-- /flex flex-col min-h-screen pt-14 -->
 
 <!-- ════════════════ SCRIPT ════════════════ -->
 <script src="shared.js"></script>
@@ -522,7 +474,8 @@ let taiVals = { opu:0, te:0, szu:0, fbt:0, bt:0, tbx:0 };
   const now = new Date();
   const days = ['日','一','二','三','四','五','六'];
   const d = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} (${days[now.getDay()]})`;
-  document.getElementById('header-date').textContent = d;
+  const todayEl = document.getElementById('today-display');
+  if (todayEl) todayEl.textContent = d;
   const t = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
   document.getElementById('autosave-time').textContent = t;
 })();
@@ -779,13 +732,13 @@ function switchState(state) {
 
 function submitGupan() {
   const staffA = document.getElementById('staff-a').value;
-  if (!staffA) { alert('請先選擇估盤人甲'); return; }
+  if (!staffA) { showToast('請先選擇估盤人甲', 'warn'); return; }
   switchState('B');
 }
 
 function confirmGupan() {
   const staffB = document.getElementById('staff-b').value;
-  if (!staffB) { alert('請先選擇核對人乙'); return; }
+  if (!staffB) { showToast('請先選擇核對人乙', 'warn'); return; }
   const now = new Date();
   const t = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
   const staffA = document.getElementById('staff-a').value || '—';
@@ -837,11 +790,11 @@ function saveConfirmedData(now, t, staffA, staffB) {
 // ══════════════════════════════════════════
 function openNav() {
   document.getElementById('nav-drawer').classList.add('open');
-  document.getElementById('nav-overlay').style.display = 'block';
+  document.getElementById('nav-overlay').classList.add('open');
 }
 function closeNav() {
   document.getElementById('nav-drawer').classList.remove('open');
-  document.getElementById('nav-overlay').style.display = 'none';
+  document.getElementById('nav-overlay').classList.remove('open');
 }
 
 // ══════════════════════════════════════════
